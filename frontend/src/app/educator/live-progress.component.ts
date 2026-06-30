@@ -128,12 +128,8 @@ export class LiveProgressComponent implements OnInit, OnDestroy {
     this.learnosityService.loadEventsApi(async () => {
       this.isLoading = false;
       try {
-        // Fetch the { user_id: hash } map from the backend (secret stays server-side).
-        // Per Learnosity support the Events API also accepts plain user_id strings;
-        // we use the documented hashed `users` map for parity with their docs.
-        const users = await this.learnosityService.getEventsUsers(this.eventUserIds);
         const initRequest = {
-          users,
+          users: this.eventUserIds,
           user_id: TEACHER_USER_ID,
         };
         this.learnosityService.initEventsApi(initRequest, {
