@@ -1,0 +1,49 @@
+<div class="live-progress">
+  <header class="lp-header">
+    <a class="btn-back" routerLink="/" aria-label="Go back">&larr; Back</a>
+    <div class="lp-titles">
+      <nav class="breadcrumb">
+        <a routerLink="/">Assigned Assessments</a>
+        <span class="sep">/</span>
+        <span>{{ assessmentTitle }}</span>
+      </nav>
+      <h1>Live Progress Report</h1>
+    </div>
+    <button class="btn" (click)="logUserData()">Log User Data</button>
+  </header>
+
+  <div class="lp-body">
+    <table class="lp-table" *ngIf="!isLoading; else loadingState">
+      <thead>
+        <tr>
+          <th>Student</th>
+          <th>Status</th>
+          <th>Active</th>
+          <th>Current Item</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.name }}</td>
+          <td>
+            <span class="pill" [ngClass]="statusToPillClass(user.sessionStatus)">
+              {{ statusToLabel(user.sessionStatus) }}
+            </span>
+          </td>
+          <td>
+            <span class="pill" [ngClass]="user.active === true ? 'pill-info' : 'pill-negative'">
+              {{ user.active === true ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>{{ user.currentItem ?? '—' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #loadingState>
+      <p class="loading">Initializing Events API…</p>
+    </ng-template>
+
+    <div *ngIf="errorMessage" class="lp-error">{{ errorMessage }}</div>
+  </div>
+</div>

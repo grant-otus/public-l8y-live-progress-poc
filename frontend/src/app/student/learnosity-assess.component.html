@@ -1,0 +1,70 @@
+<div class="assess-header">
+  <div class="assess-header-inner">
+    <button
+      *ngIf="!assessmentInProgress"
+      class="btn"
+      type="button"
+      (click)="backToList()"
+    >
+      Back
+    </button>
+    <button
+      *ngIf="assessmentInProgress"
+      class="btn"
+      type="button"
+      (click)="saveAndExit()"
+    >
+      Save &amp; Exit
+    </button>
+    <span class="assess-title">{{ assessmentTitle }}</span>
+    <span class="student-name">{{ studentName }}</span>
+    <span class="in-progress">In Progress: {{ assessmentInProgress }}</span>
+    <button class="btn" type="button" (click)="logData()">Log Data</button>
+  </div>
+</div>
+
+<div class="assess-body" #reportContainer>
+  <div id="learnosity_assess"></div>
+</div>
+
+<style>
+  .assess-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #1f2733;
+    color: #fff;
+    z-index: 10;
+  }
+  .assess-header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 24px;
+  }
+  .assess-header .btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .assess-header .btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+  .assess-title {
+    font-weight: 600;
+  }
+  .assess-body {
+    margin-top: 80px;
+    margin-bottom: 100px;
+    padding: 0 24px;
+  }
+</style>
