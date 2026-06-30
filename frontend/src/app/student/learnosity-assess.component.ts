@@ -97,9 +97,7 @@ export class LearnosityAssessComponent implements OnInit, OnDestroy {
         const publishResult = eventsApp.publish(event);
         console.log('publishResult');
         console.dir(publishResult, { depth: null });
-        // this._learnosityService.learnosityItemsApp.eventsApp().publish(event);
-        // save() success is a Learnosity callback (outside Angular's zone).
-        this.zone.run(() => this._router.navigate(['/']));
+        this.zone.run(() => this.backToList());
       },
       error: () => {
         console.error('Error saving assessment on exit.');
