@@ -5,10 +5,12 @@
     <title>Live Progress POC</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- URLs must match ITEMS_API_URL / EVENTS_API_URL in learnosity.service.ts. -->
+    <script src="https://items.learnosity.com?v2025.2.LTS"></script>
+    <script src="https://events.learnosity.com?v2025.2.LTS"></script>
   </head>
   <body>
-    <!-- Learnosity Items / Events / MathJax scripts are injected at runtime by
-         LearnosityService.loadScriptFromUrl (ported from the Otus app). -->
     <app-root></app-root>
   </body>
 </html>
