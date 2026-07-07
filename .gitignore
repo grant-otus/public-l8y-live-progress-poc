@@ -4,6 +4,3 @@ dist/
 .angular/
 *.log
 .DS_Store
-
-# Local self-signed dev cert (generate via the openssl command in the README)
-frontend/ssl/
