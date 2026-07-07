@@ -77,26 +77,20 @@ export class LearnosityAssessComponent implements OnInit, OnDestroy {
     const settings = {
       success: () => {
         console.log('Leaving the assessment, publishing exited event!');
-        const event = {
+        const publishParams = {
+          // tried both true or false, doesn't seem to have an effect
           xapi: false,
-          events: [
-            {
-              kind: 'assess_logging',
-              actor: this.learnosityUserId,
-              verb: 'exited',
-              object: {
-                id: crypto.randomUUID(),
-              },
+          events: [{
+            kind: 'assess_logging',
+            actor: this.learnosityUserId,
+            verb: 'exited',
+            object: {
+              id: crypto.randomUUID(),
             },
-          ],
+          }],
         };
-        console.dir(event, { depth: null });
-        const eventsApp = this._learnosityService.learnosityItemsApp.eventsApp();
-        console.log('eventsApp');
-        console.dir(eventsApp, { depth: null });
-        const publishResult = eventsApp.publish(event);
-        console.log('publishResult');
-        console.dir(publishResult, { depth: null });
+        console.dir(publishParams, { depth: null });
+        this._learnosityService.learnosityItemsApp.eventsApp().publish(publishParams);
         this.zone.run(() => this.backToList());
       },
       error: () => {
@@ -123,13 +117,13 @@ export class LearnosityAssessComponent implements OnInit, OnDestroy {
 
   private getInitOptions(): any {
     const initOptions: any = {
-      // Note: the Otus original also sets a top-level `events: true` here, but that is
-      // not a documented Items API init field (the Otus code comments "not sure if this
-      // is needed") and the Learnosity demos do not use it. It spins up a legacy events
-      // bridge that triggers the cross-origin postMessage warning to events.learnosity.com.
-      // Event emission is driven by `config.configuration.events` below instead.
-      events: true, // re-enable to drive eventsApp.publish (https://help.learnosity.com/hc/en-us/articles/16461138036125-eventsApp-Methods-Items-API#:~:text=This%20method%20only%20works%20when%20the%20rendering_type%20initialization%20option%20is%20set%20to%20%22assess%22%20and%20also%20the%20events%20initialization%20option%20is%20set%20to%20true.)
-      user_id: this.learnosityUserId, // required
+      // @see https://help.learnosity.com/hc/en-us/articles/16560472056093-events-Initialization-Items-API
+      // when set to true, this causes an error from the underlying EventsApi
+      // api.js:1 Failed to execute 'postMessage' on 'DOMWindow': The target origin provided ('https://events.learnosity.com') does not match the recipient window's origin ('https://localhost:4200').
+      // this also prevents the itemsApi readyListener callback from being invoked
+      // events: true,
+      events: false,
+      user_id: this.learnosityUserId,
       session_id: this.sessionId,
       items: this.itemsToLoad,
       rendering_type: 'assess',
