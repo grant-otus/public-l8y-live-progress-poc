@@ -1,4 +1,4 @@
-import { Component, ElementRef, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LearnosityService } from '../services/learnosity.service';
@@ -28,7 +28,7 @@ import {
   imports: [CommonModule],
   templateUrl: './learnosity-assess.component.html',
 })
-export class LearnosityAssessComponent implements OnInit, OnDestroy {
+export class LearnosityAssessComponent implements OnInit {
   @ViewChild('reportContainer', { static: true }) reportContainer!: ElementRef;
 
   sessionId!: string;
@@ -60,13 +60,6 @@ export class LearnosityAssessComponent implements OnInit, OnDestroy {
     this.learnosityUserId = learnosityUserId(this.studentId);
 
     this.loadItems();
-  }
-
-  ngOnDestroy(): void {
-    // Reset the Items app so a re-entry starts clean (trimmed from Otus ngOnDestroy).
-    const itemsApp = this._learnosityService.learnosityItemsApp;
-    itemsApp?.reset?.();
-    this._learnosityService.learnosityItemsApp = null;
   }
 
   // Publishes an `exited` event (consumed by the educator Live Progress view) and
