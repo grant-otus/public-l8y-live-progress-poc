@@ -100,4 +100,3 @@ optional.
 
 `frontend/src/app/fixtures/poc-data.ts` holds the assignment, students, and item
 references. Swap `ITEMS` / `ASSESSMENT_TITLE` / `STUDENTS` to point at other content.
-```
