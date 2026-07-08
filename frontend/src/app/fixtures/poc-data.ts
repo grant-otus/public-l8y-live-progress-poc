@@ -19,7 +19,7 @@ export const CLASS_ID = 88888;
 export const ACTIVITY_ID = `demo_activity_${ASSIGNMENT_ID}`;
 export const COURSE_ID = `demo_course_${CLASS_ID}`;
 
-export const ASSESSMENT_TITLE = 'Assignment 1';
+export const ASSESSMENT_TITLE = 'Assignment';
 
 // The educator user that subscribes to the Events API stream.
 export const TEACHER_USER_ID = 'otus-teacher-0';
