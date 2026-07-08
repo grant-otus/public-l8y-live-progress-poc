@@ -10,6 +10,7 @@ import {
   STUDENTS,
   TEACHER_USER_ID,
   learnosityUserId,
+  ASSIGNMENT_ID,
 } from '../fixtures/poc-data';
 
 /**
@@ -33,7 +34,7 @@ import {
 export class LiveProgressComponent implements OnInit, OnDestroy {
   isLoading = true;
   errorMessage: string | null = null;
-  assessmentTitle: string | null = ASSESSMENT_TITLE;
+  assessmentTitle = `${ASSESSMENT_TITLE} ${ASSIGNMENT_ID}`;
   users: LiveProgressUserState[] = [];
   activityId: string | null = ACTIVITY_ID;
 

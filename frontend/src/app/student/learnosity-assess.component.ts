@@ -9,6 +9,7 @@ import {
   ITEMS,
   learnosityUserId,
   STUDENTS,
+  ASSIGNMENT_ID,
 } from '../fixtures/poc-data';
 
 /**
@@ -42,7 +43,7 @@ export class LearnosityAssessComponent implements OnInit {
 
   itemsToLoad: { id: string; reference: string; organisation_id: number | null }[] = [];
 
-  readonly assessmentTitle = ASSESSMENT_TITLE;
+  readonly assessmentTitle = `${ASSESSMENT_TITLE} ${ASSIGNMENT_ID}`;
 
   constructor(
     private readonly _learnosityService: LearnosityService,
@@ -123,7 +124,7 @@ export class LearnosityAssessComponent implements OnInit {
       state: 'initial',
       type: 'submit_practice',
       activity_id: ACTIVITY_ID,
-      name: 'Assessment - ' + this.assessmentTitle,
+      name: this.assessmentTitle,
       course_id: COURSE_ID,
       config: {
         'ui-style': 'horizontal',
